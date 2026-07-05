@@ -1,0 +1,25 @@
+# Bitpack OS Pro packages
+xfce4
+lightdm
+firefox-esr
+mousepad
+
+libreoffice
+vlc
+git
+python3-pip
+ufw
+htop
+neofetch
+firmware-linux
+firmware-iwlwifi
+build-essential
+
+zfs-dkms
+zfsutils-linux
+
+zsh
+curl
+wget
+python3-tk
+

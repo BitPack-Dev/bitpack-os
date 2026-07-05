@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<channel name="xfce4-desktop" version="1.0">
+  <property name="/backdrop/screen0/monitor0/image-style" type="int" value="3"/>
+  <property name="/backdrop/screen0/monitor0/image-path" type="string" value="/usr/share/backgrounds/bitpack-default.jpg"/>
+</channel>
+

@@ -1,0 +1,45 @@
+# --- CORE DESKTOP & INTERFACE ---
+xfce4
+xfce4-goodies           # Adds battery icons, CPU monitors, and extra widgets
+lightdm
+lightdm-gtk-greeter
+slick-greeter           # A much prettier login screen
+network-manager-gnome   # Essential for Wi-Fi and Ethernet icons
+pavucontrol             # Volume and Audio control panel
+blueman                 # Bluetooth manager
+
+# --- PRODUCTIVITY (Company Ready) ---
+libreoffice-writer      # Microsoft Word alternative
+libreoffice-calc        # Microsoft Excel alternative
+libreoffice-impress     # PowerPoint alternative
+evince                  # PDF viewer
+galculator              # Calculator
+
+# --- INTERNET & COMMUNICATION ---
+firefox-esr             # Stable Web Browser
+thunderbird             # Professional Email client
+transmission-gtk        # Torrent/Download manager
+
+# --- MULTIMEDIA ---
+vlc                     # Video and Music player
+ristretto               # Fast Image viewer
+shotwell                # Photo organizer
+
+# --- SYSTEM TOOLS ---
+thunar                  # The File Manager
+gnome-disk-utility      # For managing hard drives and USBs
+htop                    # Task Manager (shows CPU/RAM usage in terminal)
+neofetch                # Shows "Bitpack OS" logo in terminal
+unzip                   # For extracting files
+zip
+curl                    # Network tools
+wget
+ufw                     # Firewall for company security
+
+# --- DEVELOPER TOOLS (Personal Use) ---
+git
+python3
+python3-pip
+build-essential
+mousepad                # Simple Text Editor
+geany                   # Lightweight Code Editor

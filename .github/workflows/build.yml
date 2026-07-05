@@ -1,0 +1,36 @@
+name: Build Bitpack OS ISO
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install live-build
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y live-build
+
+      - name: Make build script executable
+        run: chmod +x ./build-bitpack.sh
+
+      - name: Build ISO
+        env:
+          OUTPUT_DIR: ./out
+        run: |
+          ./build-bitpack.sh
+
+      - name: Upload ISO artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: bitpack-os-iso
+          path: ./out/*.iso
+          if-no-files-found: error
+
