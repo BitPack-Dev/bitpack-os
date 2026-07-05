@@ -29,6 +29,9 @@ log "Using live-build dir: ${LB_DIR}"
 log "Output dir: ${OUTPUT_DIR}"
 
 rm -rf "${LB_DIR}" "${OUTPUT_DIR}"
+
+# Ensure live-build config exists even on fresh runs.
+
 mkdir -p "${LB_DIR}" "${OUTPUT_DIR}"
 
 # Base configuration for live-build.
@@ -106,16 +109,16 @@ chmod +x "${LB_DIR}/config/chroot-hooks/customize-chroot"
 # The repo path is config/package-lists.
 log "Preparing package list...
 "
-cp -v "./config/package-lists/pro.list.chroot" "${LB_DIR}/config/package-lists/pro.list.chroot"
-# Back-compat: also include the base desktop list
+cp -v "./config/package-lists/pro.list.chroot" "${LB_DIR}/config/package-lists/pro.list.chroot" 
+# Also include base desktop lists.
 cp -v "./config/package-lists/desktop.list.chroot" "${LB_DIR}/config/package-lists/desktop.list.chroot"
+cp -v "./config/package-lists/desktop-plus.list.chroot" "${LB_DIR}/config/package-lists/desktop-plus.list.chroot"
 
-# Use Pro package list as primary
-# (live-build will include whatever list(s) are configured by name)
-if [[ -d "${LB_DIR}/config" ]]; then
-  mkdir -p "${LB_DIR}/config/package-lists"
-  # Ensure pro is present even if lb config defaults change.
-fi
+# Copy our live-build include tree so config/includes.chroot/* ends up at ISO root.
+# live-build expects these files under the generated config directory.
+mkdir -p "${LB_DIR}/config/includes.chroot"
+rm -rf "${LB_DIR}/config/includes.chroot"/* || true
+cp -a "./config/includes.chroot/." "${LB_DIR}/config/includes.chroot/"
 
 # Generate the live system and build ISO.
 log "Building ISO (this may take a while)..."

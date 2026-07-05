@@ -23,3 +23,19 @@ curl
 wget
 python3-tk
 
+# Additional corporate requirements (requested)
+libreoffice
+vlc
+firefox-esr
+git
+python3-pip
+ufw
+htop
+neofetch
+firmware-linux
+firmware-iwlwifi
+build-essential
+
+# ZFS already included above
+
+

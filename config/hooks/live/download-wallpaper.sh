@@ -1,44 +1,27 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-# Download a professional 4K dark-themed wallpaper and install it into the ISO.
-# Best-effort: if download fails, still exit successfully (build should continue).
+# Bitpack default wallpaper (download a professional 4K dark-themed image)
+# Best-effort: if download fails, exit 0.
 
-TARGET_DIR="${LB_CHROOT_PATH:-/}" 
+ROOT="${LB_CHROOT_PATH:-/}"
 
-# In live-build hooks, LB_CHROOT_PATH is usually the target root.
-# We'll default to a safe placeholder if not present.
-if [[ -n "${LB_CHROOT_PATH:-}" && -d "${LB_CHROOT_PATH}" ]]; then
-  ROOT="${LB_CHROOT_PATH}"
-else
-  ROOT="${PWD}"
+# live-build hook runs with env var LB_CHROOT_PATH pointing at the chroot root.
+if [[ -z "${ROOT}" || ! -d "${ROOT}" ]]; then
+  ROOT="/" 
 fi
 
-ROOT_BG="${ROOT}/usr/share/backgrounds"
-mkdir -p "${ROOT_BG}"
+mkdir -p "${ROOT}/usr/share/backgrounds" 
+OUT_FILE="${ROOT}/usr/share/backgrounds/bitpack-default.jpg"
 
-OUT_FILE="${ROOT_BG}/bitpack-default.jpg"
+URL="https://images.unsplash.com/photo-1545239351-1141bd82e8a6?auto=format&fit=crop&w=3840&q=80"
 
-# A stable image URL is required; use a fallback gradient if this fails.
-# Replace with a preferred wallpaper URL if you have one.
-URL="https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=3840&q=80"
-
-# Attempt download.
 if command -v curl >/dev/null 2>&1; then
-  if ! curl -L --fail --silent --show-error "$URL" -o "${OUT_FILE}"; then
-    echo "Wallpaper download failed; continuing without updating image." >&2
-    rm -f "${OUT_FILE}" || true
-    exit 0
-  fi
+  curl -L --fail --silent --show-error "$URL" -o "$OUT_FILE" || true
 elif command -v wget >/dev/null 2>&1; then
-  if ! wget -qO "${OUT_FILE}" "$URL"; then
-    echo "Wallpaper download failed; continuing without updating image." >&2
-    rm -f "${OUT_FILE}" || true
-    exit 0
-  fi
+  wget -qO "$OUT_FILE" "$URL" || true
 else
-  echo "curl/wget not found; skipping wallpaper download." >&2
-  exit 0
+  true
 fi
 
 exit 0
