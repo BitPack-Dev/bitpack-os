@@ -1,0 +1,15 @@
+# Personal / local build artifacts
+out/
+live-build/
+
+# Any accidental scratch files
+*.iso
+*.img
+
+# OS-specific
+*.log
+*.tmp
+
+# Keep empty dirs if needed
+!config/includes.chroot/**
+
