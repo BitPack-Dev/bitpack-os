@@ -41,6 +41,8 @@ log "Initializing live-build config..."
 # Fixed: Removed --parent (invalid directory flag)
 # Fixed: Removed non-free-firmware (not in bullseye)
 lb config \
+  log "Initializing live-build config..."
+lb config \
   --architectures amd64 \
   --distribution bullseye \
   --mode debian \
@@ -51,8 +53,11 @@ lb config \
   --source false \
   --mirror-bootstrap http://deb.debian.org/debian \
   --mirror-binary http://deb.debian.org/debian \
+  --mirror-chroot-security http://security.debian.org/debian-security \
+  --mirror-binary-security http://security.debian.org/debian-security \
   --checksums sha256 \
   --archive-areas "main contrib non-free"
+  --parent-security-distribution bullseye-security
 
 # Now that config/ is created by lb config, we populate it
 log "Preparing configuration tree..."
