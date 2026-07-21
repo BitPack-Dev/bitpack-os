@@ -95,3 +95,6 @@ cp -v "${ISO_PATH}" "${OUTPUT_DIR}/bitpack-os.iso"
 
 cd "${REPO_ROOT}"
 log "Done. ISO copied to: ${OUTPUT_DIR}"
+
+log "Fixing permissions..."
+sudo chown -R $USER:$USER "${OUTPUT_DIR}"
