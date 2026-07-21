@@ -25,7 +25,7 @@ jobs:
         env:
           OUTPUT_DIR: ./out
         run: |
-          ./build-bitpack.sh
+          sudo ./build-bitpack.sh
 
       - name: Upload ISO artifact
         uses: actions/upload-artifact@v4
