@@ -57,7 +57,6 @@ lb config \
   --mirror-binary-security http://security.debian.org/debian-security \
   --checksums sha256 \
   --archive-areas "main contrib non-free"
-  --parent-security-distribution bullseye-security
 
 # Now that config/ is created by lb config, we populate it
 log "Preparing configuration tree..."
