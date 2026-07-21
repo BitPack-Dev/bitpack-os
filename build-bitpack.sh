@@ -1,6 +1,11 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+if [[ $EUID -ne 0 ]]; then
+   echo "This script must be run as root (use sudo)" 
+   exit 1
+fi
+
 # Bitpack OS ISO build script using live-build.
 HOSTNAME="bitpack"
 USERNAME="bitpack-user"
@@ -98,3 +103,8 @@ log "Done. ISO copied to: ${OUTPUT_DIR}"
 
 log "Fixing permissions..."
 sudo chown -R $USER:$USER "${OUTPUT_DIR}"
+
+if [ -n "${SUDO_USER:-}" ]; then
+    chown -R "$SUDO_USER":"$SUDO_USER" "${OUTPUT_DIR}"
+    chown -R "$SUDO_USER":"$SUDO_USER" "${LB_DIR}"
+fi
